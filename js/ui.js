@@ -542,3 +542,49 @@ function renderizarLojaPropriedades(saldoUsuario) {
     html += `</div></div>`;
     return html;
 }
+// Renderiza o painel de confrontos exibindo vitórias (verde) e derrotas (vermelho)
+function renderizarSimulacaoConfrontos(clubeId) {
+    if (!perfilUsuario.clubeComprado) {
+        return `<div class="aviso-bloqueio">🔒 Compre um clube para liberar a Central de Simulação de Confrontos!</div>`;
+    }
+
+    const jogosDoClube = historicoConfrontos.filter(j => j.mandanteId === clubeId || j.visitanteId === clubeId);
+
+    let html = `
+    <div class="painel-confrontos">
+        <h3>📊 Central de Simulação & Histórico de Rodadas</h3>
+        <div class="lista-jogos">`;
+
+    if (jogosDoClube.length === 0) {
+        html += `<p>Nenhuma partida simulada nesta temporada ainda.</p>`;
+    } else {
+        jogosDoClube.forEach(jogo => {
+            const ehMandante = jogo.mandanteId === clubeId;
+            const golsMeuTime = ehMandante ? jogo.golsMandante : jogo.golsVisitante;
+            const golsAdversario = ehMandante ? jogo.golsVisitante : jogo.golsMandante;
+            
+            // Define o sinalizador (Verde: Vitória, Vermelho: Derrota, Cinza: Empate)
+            let statusClasse = "empate";
+            let sinalizador = "⚪"; // Empate
+            
+            if (golsMeuTime > golsAdversario) {
+                statusClasse = "vitoria";
+                sinalizador = "🟢"; // Vitória
+            } else if (golsMeuTime < golsAdversario) {
+                statusClasse = "derrota";
+                sinalizador = "🔴"; // Derrota
+            }
+
+            html += `
+            <div class="card-confronto ${statusClasse}">
+                <span class="status-sinal">${sinalizador}</span>
+                <span class="time-mandante">${jogo.mandanteNome} ${jogo.golsMandante}</span>
+                <span class="x">x</span>
+                <span class="time-visitante">${jogo.golsVisitante} ${jogo.visitanteNome}</span>
+            </div>`;
+        });
+    }
+
+    html += `</div></div>`;
+    return html;
+}
