@@ -514,4 +514,31 @@ function renderizarPainelPatrocinio(patrocinadores, nivelClube) {
 
     html += `</div>`;
     return html;
+
+  
+}
+// Renderiza a Loja de Imóveis e Empreendimentos
+function renderizarLojaPropriedades(saldoUsuario) {
+    let html = `
+    <div class="painel-investimentos">
+        <h3>🏦 Mercado Imobiliário & Empreendimentos</h3>
+        <p>Seu Saldo Pessoal: <strong>${formatarMoeda(saldoUsuario)}</strong></p>
+        <div class="grid-propriedades">`;
+
+    catalogoPropriedades.forEach(p => {
+        const podeComprar = saldoUsuario >= p.preco;
+        html += `
+        <div class="card-propriedade">
+            <div class="icone">${p.icone}</div>
+            <h4>${p.nome}</h4>
+            <p><strong>Preço:</strong> ${formatarMoeda(p.preco)}</p>
+            <p><strong>Renda Mensal:</strong> +${formatarMoeda(p.retornoMensal)}</p>
+            <button onclick="comprarPropriedade(${p.id})" ${!podeComprar ? 'disabled' : ''}>
+                ${podeComprar ? 'Comprar' : 'Saldo Insuficiente'}
+            </button>
+        </div>`;
+    });
+
+    html += `</div></div>`;
+    return html;
 }
