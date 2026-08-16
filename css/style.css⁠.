@@ -1,1 +1,88 @@
 
+/* --- TEMA CLEAN & MODERN STYLE iOS --- */
+
+/* Tipografia e Fundo Geral estilo Apple */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif !important;
+    background-color: #f2f2f7 !important; /* Cinza claro suave típico do iOS */
+    color: #1c1c1e !important;
+    margin: 0;
+    padding: 12px;
+}
+
+/* Efeito de Vidro Fosco (Glassmorphism) para Containers */
+#conteudo-principal, .painel-investimentos, .painel-confrontos, .tabela-container {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 20px !important;
+    padding: 16px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    margin-bottom: 20px;
+}
+
+/* Cards com Estilo de Células iOS */
+.card-propriedade, .card-jogador, .card-patrocinio, .card-confronto {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    margin-bottom: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    border: none !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-propriedade:active, .card-jogador:active {
+    transform: scale(0.98); /* Feedback ao toque no celular */
+}
+
+/* Botões Estilo iOS (Arredondados e Limpos) */
+button {
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #007aff !important; /* Azul iOS */
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 12px 20px !important;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+button:active {
+    opacity: 0.7;
+}
+
+button:disabled {
+    background-color: #e5e5ea !important;
+    color: #8e8e93 !important;
+}
+
+/* Tabelas Minimalistas estilo iOS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid #e5e5ea;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f8f8f8;
+    color: #8e8e93;
+    font-weight: 600;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
