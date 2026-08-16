@@ -83,3 +83,20 @@ function gerarAvatarSVG(jogadorId) {
         <path d="M 20 90 Q 50 65 80 90 Z" fill="#1e293b" />
     </svg>`;
 }
+
+// Catálogo de Imóveis e Empreendimentos para comprar
+const catalogoPropriedades = [
+    { id: 1, nome: "Apartamento de Luxo", tipo: "imovel", preco: 1500000, retornoMensal: 8000, icone: "🏢" },
+    { id: 2, nome: "Mansão com Campo", tipo: "imovel", preco: 8000000, retornoMensal: 35000, icone: "🏰" },
+    { id: 3, nome: "Rede de Academias", tipo: "empreendimento", preco: 5000000, retornoMensal: 45000, icone: "🏋️" },
+    { id: 4, nome: "Banco Digital / Fintech", tipo: "empreendimento", preco: 30000000, retornoMensal: 320000, icone: "🏦" },
+    { id: 5, nome: "Estádio Próprio", tipo: "empreendimento", preco: 100000000, retornoMensal: 1200000, icone: "🏟️" }
+];
+
+// Dados Iniciais do Personagem Principal (Seu Perfil)
+const perfilUsuario = {
+    nome: "Você (Manager/Craque)",
+    saldoPessoal: 500000, // Dinheiro na conta pessoal
+    propriedadesCompradas: [],
+    reputacao: 50
+};
