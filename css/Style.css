@@ -1,0 +1,242 @@
+/* ============================================================
+   TEMA DARK MINIMALIST & OLED - INSPIRADO NO FCM 2026
+   ============================================================ */
+
+:root {
+  --bg-main: #000000;           /* Preto OLED profundo */
+  --bg-card: #0d0d0e;           /* Cinza metálico bem escuro */
+  --bg-card-hover: #161618;     /* Destaque ao tocar */
+  --bg-input: #1a1a1e;          /* Fundo de campos de texto */
+  --border-color: #26262a;      /* Linhas finas elegantes */
+  --border-highlight: #3f3f46;  /* Borda ativa */
+  
+  --text-primary: #ffffff;      /* Branco puro */
+  --text-secondary: #a1a1aa;    /* Cinza acetinado */
+  --text-muted: #71717a;        /* Cinza escuro para detalhes */
+  
+  --accent-white: #ffffff;
+  --accent-gray: #27272a;
+  --accent-green: #22c55e;      /* Apenas para vitórias e lucros */
+  --accent-red: #ef4444;        /* Apenas para derrotas e custos */
+  --accent-gold: #eab308;       /* Para dinheiro/moedas */
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", sans-serif;
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary) !important;
+  line-height: 1.5;
+}
+
+button { font: inherit; cursor: pointer; }
+input, select, textarea { font: inherit; }
+a { color: var(--text-primary); }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+
+/* ---------- APP SHELL & NAVIGATION ---------- */
+.topbar {
+  min-height: 60px;
+  background: rgba(13, 13, 14, 0.9) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border-color) !important;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.mini {
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: var(--text-primary) !important;
+  font-size: 16px;
+}
+.mini span { color: var(--text-secondary); }
+
+.topbar-money {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+/* Tabbar Mobile (Inspirado no Menu do FCM) */
+.tabbar {
+  background: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-color) !important;
+  padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+}
+
+.tabbar button {
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none !important;
+}
+
+.tabbar button.active {
+  color: var(--text-primary) !important;
+}
+
+nav.desktop-nav button {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  padding: 8px 14px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease;
+}
+
+nav.desktop-nav button.active, nav.desktop-nav button:hover {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* ---------- ESTRUTURA DE PAINÉIS & CARDS ---------- */
+.card, #conteudo-principal, .painel-investimentos, .painel-confrontos, .tabela-container {
+  background: var(--bg-main) !important;
+  border-radius: 0px !important;
+  padding: 16px !important;
+  margin-bottom: 20px;
+}
+
+.card-propriedade, .card-jogador, .card-patrocinio, .card-confronto, .player, .stat, .list-item {
+  background: var(--bg-card) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  margin-bottom: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.card-propriedade:active, .card-jogador:active, .player:active {
+  transform: scale(0.98);
+  border-color: var(--border-highlight) !important;
+}
+
+/* ---------- BOTÕES ESTILO METAL / MONOCROMÁTICO ---------- */
+button, .btn, .start, .card-propriedade button {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--text-primary) !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 18px !important;
+  width: 100%;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+button:active, .btn:active {
+  opacity: 0.85;
+  transform: scale(0.99);
+}
+
+button:disabled, .card-propriedade button:disabled {
+  background: var(--bg-input) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border-color) !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ---------- TABELAS MINIMALISTAS PRETO/BRANCO ---------- */
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+table.tbl th {
+  text-align: left;
+  color: var(--text-secondary);
+  background: #121214;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+table.tbl td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+table.tbl tr:last-child td {
+  border-bottom: none;
+}
+
+table.tbl tr.pos-me td {
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 700;
+}
+
+/* ---------- INPUTS E ELEMENTOS DE FORMULÁRIO ---------- */
+input, select, textarea {
+  background: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--text-primary) !important;
+}
+
+/* ---------- SINALIZADORES E STATUS ---------- */
+.badge.green, .status-sinal { color: var(--accent-green); }
+.badge.red { color: var(--accent-red); }
+.badge.gold { color: var(--accent-gold); }
+
+/* ROLAGEM NO MOBILE */
+#conteudo-principal, .painel-investimentos {
+  padding-bottom: 110px !important;
+  overflow-y: auto !important;
+  max-height: 85vh;
+}
+
+.grid-propriedades {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
