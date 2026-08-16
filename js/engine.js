@@ -277,3 +277,31 @@ function assinarPatrocinio(patrocinadorId, clube) {
     clube.orcamento += patrocinador.valorTemporada;
     alert(`Contrato com ${patrocinador.nome} assinado com sucesso! +${formatarMoeda(patrocinador.valorTemporada)} adicionados ao orçamento.`);
 }
+// Função para comprar Imóveis ou Bancos
+function comprarPropriedade(idPropriedade) {
+    const item = catalogoPropriedades.find(p => p.id === idPropriedade);
+    if (!item) return;
+
+    if (perfilUsuario.saldoPessoal >= item.preco) {
+        perfilUsuario.saldoPessoal -= item.preco;
+        perfilUsuario.propriedadesCompradas.push(item);
+        alert(`Parabéns! Você adquiriu: ${item.nome}!`);
+        // Atualizar interface
+        if (typeof atualizarTela === 'function') atualizarTela();
+    } else {
+        alert("Você não tem dinheiro suficiente na sua conta pessoal!");
+    }
+}
+
+// Processa a renda dos imóveis/bancos a cada mês/rodada do jogo
+function coletarRendaInvestimentos() {
+    let totalRenda = 0;
+    perfilUsuario.propriedadesCompradas.forEach(p => {
+        totalRenda += p.retornoMensal;
+    });
+
+    if (totalRenda > 0) {
+        perfilUsuario.saldoPessoal += totalRenda;
+        console.log(`Renda Passiva Coletada: +${formatarMoeda(totalRenda)}`);
+    }
+}
