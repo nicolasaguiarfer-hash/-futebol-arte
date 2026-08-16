@@ -305,3 +305,30 @@ function coletarRendaInvestimentos() {
         console.log(`Renda Passiva Coletada: +${formatarMoeda(totalRenda)}`);
     }
 }
+// Salva o confronto no histórico ao simular uma partida
+function simularConfronto(mandante, visitante, golsM, golsV) {
+    // Processa os pontos na tabela
+    processarResultadoPartida(mandante, visitante, golsM, golsV);
+
+    // Registra a partida no histórico para exibição visual
+    historicoConfrontos.push({
+        mandanteId: mandante.id,
+        mandanteNome: mandante.nome,
+        visitanteId: visitante.id,
+        visitanteNome: visitante.nome,
+        golsMandante: golsM,
+        golsVisitante: golsV
+    });
+}
+
+// Lógica de compra de um clube de futebol
+function comprarClubeFutebol(clube) {
+    if (perfilUsuario.saldoPessoal >= clube.preco) {
+        perfilUsuario.saldoPessoal -= clube.preco;
+        perfilUsuario.clubeComprado = clube;
+        alert(`Parabéns! Você adquiriu o ${clube.nome}. A Central de Simulação de Confrontos foi desbloqueada!`);
+        if (typeof atualizarTela === 'function') atualizarTela();
+    } else {
+        alert("Saldo insuficiente para comprar este clube!");
+    }
+}
