@@ -588,3 +588,16 @@ function renderizarSimulacaoConfrontos(clubeId) {
     html += `</div></div>`;
     return html;
 }
+function renderizarCardJogador(jogador) {
+    return `
+    <div class="card-jogador" style="display: flex; align-items: center; gap: 10px; background: #1e293b; padding: 10px; border-radius: 8px; color: white; margin-bottom: 8px;">
+        <div class="avatar-container">
+            ${gerarAvatarSVG(jogador.id)}
+        </div>
+        <div class="info-jogador">
+            <h4 style="margin: 0;">${jogador.nome}</h4>
+            <p style="margin: 2px 0;">Posição: ${jogador.posicao} | Over: ${jogador.overall}</p>
+            <p style="margin: 2px 0;">Gols: ⚽ ${jogador.gols || 0} | Assist: 👟 ${jogador.assistencias || 0}</p>
+        </div>
+    </div>`;
+}
