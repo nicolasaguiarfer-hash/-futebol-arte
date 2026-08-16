@@ -100,3 +100,5 @@ const perfilUsuario = {
     propriedadesCompradas: [],
     reputacao: 50
 };
+// Histórico de confrontos de todos os clubes
+const historicoConfrontos = [];
