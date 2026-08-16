@@ -102,3 +102,19 @@ const perfilUsuario = {
 };
 // Histórico de confrontos de todos os clubes
 const historicoConfrontos = [];
+function gerarAvatarSVG(jogadorId) {
+    const id = jogadorId || Math.floor(Math.random() * 100);
+    const peles = ["#f8d5c2", "#e0ac69", "#8d5524", "#c68642", "#3d0c02"];
+    const cabelos = ["#090806", "#2c222b", "#716353", "#b89778", "#a52a2a"];
+    
+    const corPele = peles[id % peles.length];
+    const corCabelo = cabelos[id % cabelos.length];
+
+    return `
+    <svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" fill="#e2e8f0" />
+        <circle cx="50" cy="45" r="22" fill="${corPele}" />
+        <path d="M 30 38 Q 50 15 70 38 Q 50 25 30 38 Z" fill="${corCabelo}" />
+        <path d="M 20 90 Q 50 65 80 90 Z" fill="#0f172a" />
+    </svg>`;
+}
