@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Futebol Arte Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- HERO / TELA INICIAL DE CARREIRA -->
+    <div id="hero-screen" class="hero">
+        <div class="content">
+            <h1 class="brand">FUTEBOL <span>ARTE</span></h1>
+            <p class="tag">Sua carreira. Suas decisões. Seu futebol.</p>
+            
+            <div class="newgame-box">
+                <input type="text" id="nome-agente" placeholder="Seu nome de agente">
+                <input type="text" id="cidade-agente" placeholder="Cidade (ex: Rio de Janeiro)">
+                <button class="start" onclick="iniciarNovoJogo()">INICIAR CARREIRA</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAINEL PRINCIPAL DO JOGO -->
+    <div id="app-screen" class="app">
+        <!-- BARRA SUPERIOR -->
+        <header class="topbar">
+            <div class="mini">FUTEBOL <span>ARTE</span></div>
+            <div class="profile">
+                <b id="display-agente-nome">Agente</b>
+                <small id="display-agente-cidade">Cidade</small>
+            </div>
+            <div class="topbar-money" id="display-saldo">€0</div>
+        </header>
+
+        <!-- NAVEGAÇÃO DESKTOP -->
+        <nav class="desktop-nav">
+            <button onclick="trocarAba('inicio')" class="active">Início</button>
+            <button onclick="trocarAba('clientes')">Clientes</button>
+            <button onclick="trocarAba('mercado')">Mercado</button>
+            <button onclick="trocarAba('scouting')">Scouting</button>
+            <button onclick="trocarAba('clubes')">Clubes</button>
+            <button onclick="trocarAba('ligas')">Ligas</button>
+            <button onclick="trocarAba('financeiro')">Financeiro</button>
+            <button onclick="reiniciarJogo()" style="color: var(--red) !important;">Reiniciar</button>
+        </nav>
+
+        <!-- ÁREA PRINCIPAL DE CONTEÚDO -->
+        <main class="main" id="conteudo-principal">
+            <div class="welcome">
+                <div>
+                    <span class="eyebrow">Painel de Controle</span>
+                    <h1>Bem-vindo, Agente</h1>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>Resumo da Carreira</h2>
+                    <div class="stats">
+                        <div class="stat">
+                            <b id="stat-clientes">0</b>
+                            <span>Clientes</span>
+                        </div>
+                        <div class="stat">
+                            <b id="stat-reputacao">50</b>
+                            <span>Reputação</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Ações Rápidas</h2>
+                    <div class="row">
+                        <button class="btn" onclick="abrirAbaInvestimentos()">Patrimônio & Imóveis</button>
+                        <button class="btn secondary" onclick="abrirAbaConfrontos()">Simulador de Confrontos</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- MENU INFERIOR MOBILE (ESTILO iOS / FCM 2026) -->
+        <nav class="tabbar">
+            <div class="tabbar-scroll">
+                <button onclick="trocarAba('inicio')" class="active"><span class="ic">🏠</span>Início</button>
+                <button onclick="trocarAba('clientes')"><span class="ic">👥</span>Clientes</button>
+                <button onclick="trocarAba('mercado')"><span class="ic">🔎</span>Mercado</button>
+                <button onclick="trocarAba('clubes')"><span class="ic">🏟️</span>Clubes</button>
+                <button onclick="trocarAba('financeiro')"><span class="ic">💰</span>Finanças</button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- CARREGAMENTO DOS SCRIPTS NA ORDEM CORRETA -->
+    <script src="js/data.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
