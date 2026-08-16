@@ -70,3 +70,11 @@ function abrirAbaInvestimentos() {
         conteiner.innerHTML = renderizarLojaPropriedades(perfilUsuario.saldoPessoal);
     }
 }
+function abrirAbaConfrontos() {
+    const conteiner = document.getElementById('conteudo-principal');
+    if (conteiner && perfilUsuario.clubeComprado) {
+        conteiner.innerHTML = renderizarSimulacaoConfrontos(perfilUsuario.clubeComprado.id);
+    } else {
+        alert("Você precisa comprar um clube primeiro na loja de investimentos!");
+    }
+}
