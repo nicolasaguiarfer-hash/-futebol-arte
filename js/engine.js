@@ -233,3 +233,47 @@ function changeReputation(delta, reason){
     addNews("⭐ Progressão do agente", `Sua reputação evoluiu para o nível ${newTier}. Novas oportunidades foram desbloqueadas.`);
   }
 }
+// Atualiza a tabela do campeonato após uma partida
+function processarResultadoPartida(timeMandante, timeVisitante, golsMandante, golsVisitante) {
+    timeMandante.jogos += 1;
+    timeVisitante.jogos += 1;
+
+    timeMandante.golsPro += golsMandante;
+    timeMandante.golsContra += golsVisitante;
+    timeVisitante.golsPro += golsVisitante;
+    timeVisitante.golsContra += golsMandante;
+
+    if (golsMandante > golsVisitante) {
+        timeMandante.pontos += 3;
+        timeMandante.vitorias += 1;
+        timeVisitante.derrotas += 1;
+    } else if (golsVisitante > golsMandante) {
+        timeVisitante.pontos += 3;
+        timeVisitante.vitorias += 1;
+        timeMandante.derrotas += 1;
+    } else {
+        timeMandante.pontos += 1;
+        timeVisitante.pontos += 1;
+        timeMandante.empates += 1;
+        timeVisitante.empates += 1;
+    }
+}
+
+// Registra Gols e Assistências dos Jogadores
+function registrarEstatisticaJogador(jogador, gols = 0, assistencias = 0) {
+    if (!jogador.gols) jogador.gols = 0;
+    if (!jogador.assistencias) jogador.assistencias = 0;
+
+    jogador.gols += gols;
+    jogador.assistencias += assistencias;
+}
+
+// Lógica para assinar Contrato de Patrocínio
+function assinarPatrocinio(patrocinadorId, clube) {
+    const patrocinador = listaPatrocinadores.find(p => p.id === patrocinadorId);
+    if (!patrocinador) return;
+
+    clube.patrocinadorAtual = patrocinador;
+    clube.orcamento += patrocinador.valorTemporada;
+    alert(`Contrato com ${patrocinador.nome} assinado com sucesso! +${formatarMoeda(patrocinador.valorTemporada)} adicionados ao orçamento.`);
+}
