@@ -50,3 +50,36 @@ function fmtMoney(v){
   if(v>=1000) return sign+"€"+(v/1000).toFixed(0)+"K";
   return sign+"€"+v.toFixed(0);
 }
+// Função global para formatar valores em Reais (R$)
+function formatarMoeda(valor) {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+// Estrutura base para contratos de Patrocínio
+const listaPatrocinadores = [
+    { id: 1, nome: "Master Bank", valorTemporada: 25000000, duracaoAnos: 2, nivelExigido: 4 },
+    { id: 2, nome: "Bet Esportes", valorTemporada: 12000000, duracaoAnos: 1, nivelExigido: 3 },
+    { id: 3, nome: "Guaraná Local", valorTemporada: 3000000, duracaoAnos: 3, nivelExigido: 1 },
+    { id: 4, nome: "Tech Motors", valorTemporada: 8000000, duracaoAnos: 2, nivelExigido: 2 }
+];
+
+// Gerador de Avatar Genérico SVG (para o perfil do jogador)
+function gerarAvatarSVG(jogadorId) {
+    const peles = ["#f8d5c2", "#e0ac69", "#8d5524", "#c68642", "#3d0c02"];
+    const cabelos = ["#090806", "#2c222b", "#716353", "#b89778", "#a52a2a"];
+    
+    // Escolhe cores fixas baseadas no ID do jogador
+    const corPele = peles[jogadorId % peles.length];
+    const corCabelo = cabelos[jogadorId % cabelos.length];
+
+    return `
+    <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" fill="#f0f2f5" />
+        <!-- Cabeça -->
+        <circle cx="50" cy="45" r="22" fill="${corPele}" />
+        <!-- Cabelo -->
+        <path d="M 30 38 Q 50 15 70 38 Q 50 25 30 38 Z" fill="${corCabelo}" />
+        <!-- Corpo/Camisa -->
+        <path d="M 20 90 Q 50 65 80 90 Z" fill="#1e293b" />
+    </svg>`;
+}
