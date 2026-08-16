@@ -422,3 +422,96 @@ function doProposeContract(playerId){
   toast(r.accepted? "Contrato renovado com sucesso!" : "O jogador recusou a proposta de contrato.", !r.accepted);
   goScreen("clientes");
 }
+// Renderiza a Tabela do Campeonato com detalhes completos (P, J, V, E, D, GP, GC, SG)
+function renderizarTabelaCampeonato(clubes) {
+    let html = `
+    <div class="tabela-container">
+        <h3>Tabela do Campeonato</h3>
+        <table class="tabela-classificacao">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Clube</th>
+                    <th>P</th>
+                    <th>J</th>
+                    <th>V</th>
+                    <th>E</th>
+                    <th>D</th>
+                    <th>GP</th>
+                    <th>GC</th>
+                    <th>SG</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+    // Ordena por Pontos, Vitórias e Saldo de Gols
+    const ordenados = [...clubes].sort((a, b) => {
+        if (b.pontos !== a.pontos) return b.pontos - a.pontos;
+        if (b.vitorias !== a.vitorias) return b.vitorias - a.vitorias;
+        return (b.golsPro - b.golsContra) - (a.golsPro - a.golsContra);
+    });
+
+    ordenados.forEach((clube, index) => {
+        const saldo = clube.golsPro - clube.golsContra;
+        html += `
+            <tr>
+                <td>${index + 1}º</td>
+                <td><strong>${clube.nome}</strong></td>
+                <td><strong>${clube.pontos}</strong></td>
+                <td>${clube.jogos}</td>
+                <td>${clube.vitorias}</td>
+                <td>${clube.empates}</td>
+                <td>${clube.derrotas}</td>
+                <td>${clube.golsPro}</td>
+                <td>${clube.golsContra}</td>
+                <td>${saldo > 0 ? '+' + saldo : saldo}</td>
+            </tr>`;
+    });
+
+    html += `</tbody></table></div>`;
+    return html;
+}
+
+// Renderiza o Perfil do Jogador com Avatar e Estatísticas (Gols / Assistências)
+function renderizarPerfilJogador(jogador) {
+    const avatar = gerarAvatarSVG(jogador.id);
+    const salarioFormatado = formatarMoeda(jogador.salario || 0);
+    const valorFormatado = formatarMoeda(jogador.valorMercado || 0);
+
+    return `
+    <div class="card-jogador">
+        <div class="avatar-box">
+            ${avatar}
+        </div>
+        <div class="info-jogador">
+            <h4>${jogador.nome} (${jogador.posicao})</h4>
+            <p><strong>Over:</strong> ${jogador.overall} | <strong>Idade:</strong> ${jogador.idade} anos</p>
+            <p><strong>Valor:</strong> ${valorFormatado} | <strong>Salário:</strong> ${salarioFormatado}/mês</p>
+            <div class="stats-jogador">
+                <span>⚽ <strong>Gols:</strong> ${jogador.gols || 0}</span>
+                <span>👟 <strong>Assistências:</strong> ${jogador.assistencias || 0}</span>
+            </div>
+        </div>
+    </div>`;
+}
+
+// Renderiza a Painel de Patrocinadores
+function renderizarPainelPatrocinio(patrocinadores, nivelClube) {
+    let html = `<h3>Painel de Patrocinadores</h3><div class="lista-patrocinio">`;
+
+    patrocinadores.forEach(p => {
+        const disponivel = nivelClube >= p.nivelExigido;
+        html += `
+        <div class="card-patrocinio ${disponivel ? 'disponivel' : 'bloqueado'}">
+            <h4>${p.nome}</h4>
+            <p><strong>Renda por Temporada:</strong> ${formatarMoeda(p.valorTemporada)}</p>
+            <p><strong>Duração:</strong> ${p.duracaoAnos} temporada(s)</p>
+            ${disponivel 
+                ? `<button onclick="assinarPatrocinio(${p.id})">Assinar Contrato</button>` 
+                : `<p class="aviso">Requer Nível de Clube ${p.nivelExigido}</p>`}
+        </div>`;
+    });
+
+    html += `</div>`;
+    return html;
+}
