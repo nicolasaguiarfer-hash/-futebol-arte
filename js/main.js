@@ -64,3 +64,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
   buildNav();
   bootHero();
 });
+function abrirAbaInvestimentos() {
+    const conteiner = document.getElementById('conteudo-principal'); // Use o ID da sua área principal
+    if (conteiner) {
+        conteiner.innerHTML = renderizarLojaPropriedades(perfilUsuario.saldoPessoal);
+    }
+}
