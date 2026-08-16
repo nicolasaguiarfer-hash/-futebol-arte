@@ -1,3 +1,11 @@
+function reiniciarJogo() {
+    if (confirm("Tem certeza que deseja reiniciar todo o seu progresso?")) {
+        localStorage.clear();
+        window.location.reload();
+    }
+}
+
+
 /* ================= BOOTSTRAP / NAVEGAÇÃO ================= */
 
 function buildNav(){
